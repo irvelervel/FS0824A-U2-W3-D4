@@ -22,6 +22,26 @@ fetch(EPITICKET_URL)
   .then((arrayOfConcerts) => {
     // qui dentro finisco quando ho completato l'estrazione del JSON dalla Response!
     console.log('arrayOfConcerts', arrayOfConcerts)
+    // recupero la riga nella quale innesterò le colonne per i concerti
+    const row = document.getElementById('concerts-row')
+    arrayOfConcerts.forEach((concert) => {
+      const newCol = document.createElement('div')
+      newCol.classList.add('col', 'col-12', 'col-md-6', 'col-lg-4')
+      newCol.innerHTML = `
+            <div class="card">
+                <img src="https://www.adobe.com/creativecloud/photography/discover/media_15955bf89f635a586d897b5c35f7a447b495f6ed7.jpeg?width=1200&format=pjpg&optimize=medium" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${concert.name}</h5>
+                    <p class="card-text">${concert.description}</p>
+                    <p class="card-text">${concert.price}€ - ${
+        concert.time.split('T')[0]
+      }</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        `
+      row.appendChild(newCol)
+    })
   })
   .catch((error) => {
     console.log('ERROR', error)
