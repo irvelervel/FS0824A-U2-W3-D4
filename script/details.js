@@ -32,7 +32,42 @@ fetch(EPITICKET_URL + '/' + concertId)
     // singleConcert è un oggetto, in particolare UNO DEGLI OGGETTI CONCERT A DB
     // quello con l'_id specificato!
     console.log('singleConcert', singleConcert)
+    // recupero il riferimento della colonna nel DOM
+    const col = document.getElementById('card-container')
+    col.innerHTML = `
+        <div class="card">
+            <img src="https://www.adobe.com/creativecloud/photography/discover/media_15955bf89f635a586d897b5c35f7a447b495f6ed7.jpeg?width=1200&format=pjpg&optimize=medium" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${singleConcert.name}</h5>
+                <p class="card-text">${singleConcert.description}</p>
+                <p class="card-text">${singleConcert.price}€</p>
+                <a class="btn btn-warning" href="./backoffice.html?concertId=${concertId}">MODIFICA</a>
+                <button class="btn btn-danger" onclick="deleteConcert()">ELIMINA</button>
+            </div>
+        </div>
+    `
   })
   .catch((error) => {
     console.log('ERROR', error)
   })
+
+const deleteConcert = function () {
+  console.log('PROVO A ELIMINARE IL CONCERTO')
+  // eliminiamo con una fetch
+  fetch(EPITICKET_URL + '/' + concertId, {
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.ok) {
+        // ELIMINAZIONE AVVENUTA CON SUCCESSO
+        alert('Concerto eliminato!')
+        // redirect in homepage
+        window.location.assign('./index.html')
+      } else {
+        throw new Error("Errore nell'eliminazione del concerto")
+      }
+    })
+    .catch((error) => {
+      console.log('error', error)
+    })
+}
