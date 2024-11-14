@@ -6,7 +6,7 @@ yearSpan.innerText = new Date().getFullYear() // recupero l'anno corrente e ce l
 // contatteremo 'https://striveschool-api.herokuapp.com/api/agenda'
 const EPITICKET_URL = 'https://striveschool-api.herokuapp.com/api/agenda'
 
-fetch(EPITICKET_URL)
+fetch(EPITICKET_URL) // questa fetch fa un'operazione di GET
   .then((response) => {
     console.log('RESPONSE', response)
     if (response.ok) {
@@ -36,7 +36,9 @@ fetch(EPITICKET_URL)
                     <p class="card-text">${concert.price}€ - ${
         concert.time.split('T')[0]
       }</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="./details.html?concertId=${
+                      concert._id
+                    }" class="btn btn-primary">Vai ai dettagli!</a>
                 </div>
             </div>
         `

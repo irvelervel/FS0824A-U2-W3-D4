@@ -39,6 +39,11 @@ form.addEventListener('submit', (e) => {
       if (response.ok) {
         // l'oggetto è stato salvato correttamente nel DB!
         alert('EVENTO SALVATO!')
+        // svuotiamo il form!
+        nameInput.value = ''
+        descriptionInput.value = ''
+        priceInput.value = ''
+        timeInput.value = ''
       } else {
         // molto probabilmente qualcosa non va bene nel tuo oggetto
         throw new Error('Errore nel salvataggio del concerto')
@@ -51,4 +56,5 @@ form.addEventListener('submit', (e) => {
 
 // OPERAZIONI DEL PERSISTENT STORAGE (interazioni con i DB)
 // READ (metodo GET) -> si utilizza l'endpoint principale
+// READ (metodo GET) -> si può anche utilizzare un endpoint specifico
 // CREATE (metodo POST) -> si utilizza l'endpoint principale
